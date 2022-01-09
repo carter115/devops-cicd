@@ -1,0 +1,30 @@
+server:
+  address: ":9090"
+  readTimeout: 60s
+  writeTimeout: 60s
+
+log:
+  level: debug
+  filePath: server.log
+
+redis:
+  address: "192.168.101.211:6379"
+  db: 4
+  password: "abc123"
+
+argo:
+  address: "192.168.101.211:30010"
+  namespace: "argo"
+  serviceAccount: "argo-server"
+  secret: true
+  insecureSkipVerify: true
+  http1: true
+  token: "Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6ImhZX2VoOXdzZ0F6QVFiVlVCNHFRa3IzNkVVRjFDM3Jva2oxQnF6enpJdzgifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhcmdvIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImFyZ28tc2VydmVyLXRva2VuLW1rbThkIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQubmFtZSI6ImFyZ28tc2VydmVyIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiZWM4YzZhM2QtNTgwNy00MjY4LThhMjgtMzRlOTIzNzk4MzM1Iiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50OmFyZ286YXJnby1zZXJ2ZXIifQ.fv37VjBeGVxtqeJrc_t4r-sxddvPREXQD9CCrtcheKcyezzBHRKimxTdj9JOlB3s6_JiBeBL_OPokbKOJH7SlvPFGfGnOq1KMR8mdXNX4J7jGLkpO17yQ_8bwbz1TVy8CZBvXzKto5_53c5J09knKaDWc9H9CWWdNZKzVJ05ASFm1EhLhXL6Bwafg_8eSsxArxidRK1JVGuMys2BdRu3nbysy38SXUsJUaRVh5N4XkqZSrAJrbp5WWLL5Eu8c4x_GkNeJ2wQMxNM1mCc1I6wo_5jrosn7arUcwMnKoyMnYxLKe2UZb4ur29jsVBUweGorkSDj8H8HvJBgQ3MbB6EHQ"
+
+argocd:
+  address: "192.168.101.211:30011"
+  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNzVlNGI4Zi0yOGM1LTQ4NDEtOTg3MC1jOGMyMjBmMTAyZTQiLCJpYXQiOjE2MzgzMzAxNjcsImlzcyI6ImFyZ29jZCIsIm5iZiI6MTYzODMzMDE2Nywic3ViIjoiYWRtaW46YXBpS2V5In0.udpVARiKrs01K3z-MBDc6QElojOXjb6d7yQiYggvGKA"
+  project: "default"
+  k8sServer: "https://kubernetes.default.svc"
+  repoUrl: "https://gitee.com/carter115/argocd-example-apps.git"
+  revision: "HEAD"

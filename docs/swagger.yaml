@@ -1,0 +1,451 @@
+info:
+  contact: {}
+  description: 应用自动化部署
+  title: LYY CICD API
+  version: "0.1"
+paths:
+  /application/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Application ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取Application
+      tags:
+      - 应用管理
+  /application/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: application name
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: yaml内容
+        in: body
+        name: content
+        required: true
+        schema:
+          type: string
+      - description: 是否创建ArgoCD对象
+        enum:
+        - true
+        - false
+        in: query
+        name: create_argocd
+        required: true
+        type: boolean
+      - description: 'argocd: git repo path'
+        in: query
+        name: repo_path
+        type: string
+      - description: 'argocd: namespace'
+        in: query
+        name: namespace
+        type: string
+      - description: 'argocd: helm values files(ex: a.yaml,b.yaml)'
+        in: query
+        name: value_files
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 创建Application
+      tags:
+      - 应用管理
+  /application/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Application ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: 是否删除ArgoCD对象
+        enum:
+        - true
+        - false
+        in: query
+        name: delete_argocd
+        required: true
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 删除Application
+      tags:
+      - 应用管理
+  /application/list:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取Application列表
+      tags:
+      - 应用管理
+  /deployment/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Deployment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取Deployment Yaml
+      tags:
+      - 自动部署CD管理
+  /deployment/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: argocd application name
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: git repo path
+        in: query
+        name: repo_path
+        required: true
+        type: string
+      - description: app namespace
+        in: query
+        name: namespace
+        required: true
+        type: string
+      - description: 'argocd: helm values files(ex: a.yaml,b.yaml)'
+        in: query
+        name: value_files
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 创建Deployment
+      tags:
+      - 自动部署CD管理
+  /deployment/create_yaml:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 内容
+        in: body
+        name: content
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 创建DeploymentFromYaml
+      tags:
+      - 自动部署CD管理
+  /deployment/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Deployment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 删除Deployment
+      tags:
+      - 自动部署CD管理
+  /deployment/status/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: Deployment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取Deployment状态
+      tags:
+      - 自动部署CD管理
+  /job/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 任务 ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取发布任务
+      tags:
+      - 发布任务管理
+  /job/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Application ID
+        in: query
+        name: id
+        required: true
+        type: string
+      - description: 代码分支
+        in: query
+        name: branch
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 创建发布任务
+      tags:
+      - 发布任务管理
+  /job/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Application ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 删除发布任务
+      tags:
+      - 发布任务管理
+  /job/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 数量
+        in: query
+        name: size
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 发布任务列表
+      tags:
+      - 发布任务管理
+  /job/search:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 关键字
+        in: query
+        name: keyword
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 发布任务列表
+      tags:
+      - 发布任务管理
+  /logs/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: pod name
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取pod日志
+      tags:
+      - 日志管理
+  /template/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: WorkflowTemplate ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取WorkflowTemplate
+      tags:
+      - 工作流模板
+  /template/create:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: 内容
+        in: body
+        name: context
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 创建WorkflowTemplate
+      tags:
+      - 工作流模板
+  /template/delete/{id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: WorkflowTemplate ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 删除WorkflowTemplate
+      tags:
+      - 工作流模板
+  /template/list:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取WorkflowTemplate列表
+      tags:
+      - 工作流模板
+  /template/search:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: 关键字
+        in: query
+        name: keyword
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 获取WorkflowTemplate列表
+      tags:
+      - 工作流模板
+swagger: "2.0"
